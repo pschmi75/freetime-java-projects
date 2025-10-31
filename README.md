@@ -1,0 +1,1 @@
+This is a repository for all kinds of Java projects!

@@ -1,8 +1,10 @@
 package tictactoe;
 
+import java.util.Scanner;
+
 public class TestTicTacToeGame {
 
-    private static TicTacToeGame game = new TicTacToeGame();
+    private static final TicTacToeGame game = new TicTacToeGame();
 
     public static void main(String[] args) {
         TestPlay();
@@ -14,6 +16,17 @@ public class TestTicTacToeGame {
     }
 
     static void TestPlay() {
-        game.play('A', 1, 'X');
+        Scanner input = new Scanner(System.in);
+
+        while (true) {
+            try {
+                String temp = input.nextLine();
+                char row =  temp.charAt(0);
+                int column =  temp.charAt(1) - '0';
+                game.play(row, column);
+            } catch (RuntimeException e) {
+                System.out.println("\n" + e.getMessage());
+            }
+        }
     }
 }

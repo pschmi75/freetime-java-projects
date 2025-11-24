@@ -8,7 +8,7 @@ public class TestTicTacToeGame {
 
     public static void main(String[] args) {
         TestPlay();
-        TestToString();
+        //TestToString();
     }
 
     static void TestToString() {

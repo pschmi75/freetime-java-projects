@@ -1,38 +1,37 @@
 package math;
 
-public abstract class Coordinate
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public abstract class Coordinate<Number>
 {
-    protected double[] coord;
+    protected ArrayList<Number> coord;
 
-    public Coordinate(int n)
+    protected Coordinate(int n)
     {
-        this.coord = new double[n];
+        this.coord = new ArrayList<>();
     }
 
-    public Coordinate(double[] values)
+    public Coordinate(Number[] values)
     {
-        this.coord = values;
+        this.coord = new ArrayList<>(Arrays.asList(values));
     }
 
-    public Coordinate(Coordinate c)
+    public Coordinate(Coordinate<Number> c)
     {
         this.coord = c.getCoords();
     }
-
-    protected void randomize()
+/*
+    protected void randomize(Number min, Number max)
     {
-        this.randomize(-10, 10);
-    }
-
-    protected void randomize(double min, double max)
-    {
-        double range = (double) max - min;
-        for (double val : this.coord)
+        int range = (int) max - (int) min;
+        for (int i = 0; i < this.coord.size(); i++)
         {
-            val = (Math.random() * range) + min;
+            coord.set(i, (Number) (Math.random() * range) + (int) min));
         }
     }
-
+ */
     public Vector toVector()
     {
         return new Vector(this.coord);
@@ -55,7 +54,7 @@ public abstract class Coordinate
         else throw new RuntimeException("Dimension out of range");
     }
 
-    public double[] getCoords()
+    public ArrayList<Number> getCoords()
     {
         return this.coord;
     }

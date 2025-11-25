@@ -1,18 +1,18 @@
 package math;
 
-public class Point extends Coordinate
+public class Point<Number> extends Coordinate<Number>
 {
     public Point(int n)
     {
         super(n);
     }
 
-    public Point(double[] values)
+    public Point(Number[] values)
     {
         super(values);
     }
 
-    public Point(Point p)
+    public Point(Point<Number> p)
     {
         super(p);
     }

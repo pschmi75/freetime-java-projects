@@ -1,7 +1,7 @@
 package math;
 import java.lang.Math;
 
-public class Complex extends Number
+public class Complex extends MyNumber
 {
     double re;
     double im;
@@ -137,6 +137,6 @@ public class Complex extends Number
     @Override
     public double doubleValue()
     {
-        return (double) this.getRad();
+        return this.getRad();
     }
 }

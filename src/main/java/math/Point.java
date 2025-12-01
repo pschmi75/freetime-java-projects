@@ -1,31 +1,30 @@
 package math;
 
-public class Point<Number> extends Coordinate<Number>
+import java.util.ArrayList;
+
+public class Point extends Coordinate
 {
-    public Point(int n)
+    protected Point()
     {
-        super(n);
     }
 
-    public Point(Number[] values)
+    public Point(double[] values)
     {
         super(values);
     }
 
-    public Point(Point<Number> p)
+    public Point(Point p)
     {
         super(p);
     }
 
-    @Override
-    public String toString()
+    public double distanceTo(Point p)
     {
-        StringBuilder output = new StringBuilder("(");
-        for (int i = 0; i < this.getDimension(); i++)
-        {
-            output.append(this.getCoord(i));
-            if (i != this.getDimension() - 1) output.append("|");
+
+
+        double sum = 0;
+        for (int i = 0; i < this.getDimension(); i++) {
+
         }
-        return output.append(")").toString();
     }
 }

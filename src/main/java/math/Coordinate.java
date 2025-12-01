@@ -4,34 +4,33 @@ import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public abstract class Coordinate<Number>
+public abstract class Coordinate
 {
-    protected ArrayList<Number> coord;
+    protected double[] coord;
 
-    protected Coordinate(int n)
+    protected Coordinate()
     {
-        this.coord = new ArrayList<>();
     }
 
-    public Coordinate(Number[] values)
+    public Coordinate(double[] values)
     {
-        this.coord = new ArrayList<>(Arrays.asList(values));
+        this.coord = values;
     }
 
-    public Coordinate(Coordinate<Number> c)
+    public Coordinate(Coordinate c)
     {
         this.coord = c.getCoords();
     }
-/*
-    protected void randomize(Number min, Number max)
+
+    public void randomize(Number min, Number max)
     {
         int range = (int) max - (int) min;
-        for (int i = 0; i < this.coord.size(); i++)
+        for (int i = 0; i < this.getDimension(); i++)
         {
-            coord.set(i, (Number) (Math.random() * range) + (int) min));
+            setCoord(i, (Math.random() * range) + (int) min);
         }
     }
- */
+
     public Vector toVector()
     {
         return new Vector(this.coord);
@@ -44,28 +43,41 @@ public abstract class Coordinate<Number>
 
     public double getCoord(int n)
     {
-        if (n < this.coord.length) return this.coord[n];
+        if (n < this.getDimension()) return this.coord[0];
         else throw new RuntimeException("Dimension out of range");
     }
 
     public void setCoord(int n, double value)
     {
-        if (n < this.coord.length) this.coord[n] = value;
+        if (n < this.getDimension()) this.coord[n] = value;
         else throw new RuntimeException("Dimension out of range");
     }
 
-    public ArrayList<Number> getCoords()
+    public double[] getCoords()
     {
         return this.coord;
     }
 
     public void setCoords(double[] values)
     {
-        this.coord = values;
+        if (this.getDimension() != values.length) throw new RuntimeException("Dimension mismatch");
+        else this.coord = values;
     }
 
     public int getDimension()
     {
         return this.coord.length;
+    }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder output = new StringBuilder("(");
+        for (int i = 0; i < this.getDimension(); i++)
+        {
+            output.append(this.getCoord(i));
+            if (i != this.getDimension() - 1) output.append("|");
+        }
+        return output.append(")").toString();
     }
 }

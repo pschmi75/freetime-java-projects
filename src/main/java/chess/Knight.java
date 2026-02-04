@@ -7,25 +7,20 @@ import java.lang.Math;
 
 public class Knight extends Piece {
 
-    public Knight(Position position) {
-        super(position);
+    public Knight(Position position, String pTeam) {
+        super(position, pTeam);
     }
 
     @Override
-    public List<Position> getMoveList() {
+    public List<Position> getMoveList(Chessboard board) {
         List<Position> positions = new ArrayList<>();
         for (int x= -2; x <= 2 ; x++) {
             if (x == 0) continue;
             int y = 3 - Math.abs(x);
-            // Checkt beide Seiten
+            // Check both sides
             positions.add(new Position(pos.getX() + x, pos.getY() + y));
             positions.add(new Position(pos.getX() + x, pos.getY() - y));
         }
         return positions.stream().filter(Position::isValid).collect(Collectors.toList());
-    }
-
-    @Override
-    public String toString() {
-        return "Knight[" + getTeam() + "]: " + getPosition();
     }
 }

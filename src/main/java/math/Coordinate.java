@@ -43,7 +43,7 @@ public abstract class Coordinate
 
     public double getCoord(int n)
     {
-        if (n < this.getDimension()) return this.coord[0];
+        if (n < this.getDimension()) return this.coord[n];
         else throw new RuntimeException("Dimension out of range");
     }
 

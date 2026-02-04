@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 public class Pawn extends Piece {
 
     public Pawn(Position position, String pTeam) {
-        super(position);
+        super(position, pTeam);
     }
 
     @Override
-    public List<Position> getMoveList() {
+    public List<Position> getMoveList(Chessboard board) {
         List<Position> positions = new ArrayList<>();
         // Assuming y = 8 is starting line for black and y = 1 for white
         Position newPos;
@@ -34,11 +34,5 @@ public class Pawn extends Piece {
         */
         // All capture moves disabled for now, would need chessboard as parameter in getMoveList(), would break tests
         return positions.stream().filter(Position::isValid).collect(Collectors.toList());
-    }
-
-
-    @Override
-    public String toString() {
-        return "Pawn[" + getTeam() + "]: " + getPosition();
     }
 }

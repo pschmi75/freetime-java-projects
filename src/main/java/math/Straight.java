@@ -4,16 +4,15 @@ public class Straight
 {
     protected Vector pos;
     protected Vector dir;
-    protected char param;
+    protected char param = 'a';
     char[] params = {'α', 'β', 'γ', 'δ', 'λ', 'μ'};
 
-    public Straight(Vector pPos, char pParam, Vector pDir)
+    public Straight(Vector pPos, Vector pDir)
     {
         if (pPos.getLength() != pDir.getLength()) throw new RuntimeException("Vectors have different dimensions");
         else
         {
             this.pos = pPos;
-            this.param = pParam;
             this.dir = pDir;
         }
     }
@@ -28,7 +27,6 @@ public class Straight
     @Override
     public String toString()
     {
-        return pos.toString()  + " + " + param + " * " + dir.toString();
+        return  "f: x = " + pos.toString()  + " + " + param + " * " + dir.toString();
     }
-
 }

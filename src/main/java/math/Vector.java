@@ -46,4 +46,19 @@ public class Vector extends Coordinate
         }
         return new Vector(newCoord);
     }
+
+    public double scalar(Vector v) {
+        if (this.getDimension() != v.getDimension()) throw new RuntimeException("Dimension mismatch");
+        else {
+            double sum = 0;
+            for (int i = 0; i < this.getDimension(); i++) {
+                sum += this.getCoord(i) * v.getCoord(i);
+            }
+            return sum;
+        }
+    }
+
+    public double norm(Vector v) {
+        return Math.sqrt(this.scalar(v));
+    }
 }

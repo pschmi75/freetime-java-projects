@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Chessboard {
 
-    private Piece[][] board = new Piece[8][8];
+    private final Piece[][] board = new Piece[8][8];
 
     public boolean hasPiece(Position pos, String pTeam) {
         if (!pos.isValid()) throw new IllegalArgumentException("Invalid position");
@@ -13,7 +13,6 @@ public class Chessboard {
         else return (board[pos.getX() - 1][pos.getY() - 1] != null && board[pos.getX() - 1][pos.getY() - 1].team.equals(pTeam));
     }
 
-    /** Freiwillige Arbeit :) */
     public void promotePawn(Position pos) {
         boolean terminate = false;
         while (!terminate) {
@@ -33,14 +32,28 @@ public class Chessboard {
                 text = input.next();
             }
             if (text.equals("e")) terminate = true;
-            Piece temp = null;
-            switch (text) {
-                case "b": temp = new Bishop(pos, current.getTeam()); break;
-                case "r": temp = new Rook(pos, current.getTeam()); break;
-                case "k": temp = new Knight(pos, current.getTeam()); break;
-                case "q": temp = new Queen(pos, current.getTeam()); break;
-            }
+            Piece temp = switch (text) {
+                case "b" -> new Bishop(pos, current.getTeam());
+                case "r" -> new Rook(pos, current.getTeam());
+                case "k" -> new Knight(pos, current.getTeam());
+                case "q" -> new Queen(pos, current.getTeam());
+                default -> null;
+            };
             board[pos.getX() - 1][pos.getY() - 1] = temp;
+        }
+    }
+
+    public void capture(Piece captor, Piece captive) {
+        if (captor.getTeam().equals(captive.getTeam())) throw new IllegalArgumentException("Cannot capture piece of own team");
+        else if (captor instanceof King && captive instanceof King) throw new IllegalArgumentException("King cannot capture King");
+        else {
+            System.out.println(captor.toSimpleString() + " captured " + captive.toSimpleString() + " at " + captive.getPosition());
+            board[captive.getPosition().getX()][captive.getPosition().getY()] = captor;
+        }
+        if (captive instanceof King) {
+            System.out.println(captive.toSimpleString() + " has been captured. ");
+            if(captor.team.equals("white")) System.out.print("White wins!");
+            else System.out.print("Black wins!");
         }
     }
 }

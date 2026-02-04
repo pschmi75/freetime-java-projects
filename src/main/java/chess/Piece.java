@@ -25,19 +25,19 @@ public abstract class Piece {
         return this.team;
     }
 
-    public void moveTo(Position pos) {
-        if (!canMoveTo(pos)) throw new IllegalArgumentException("Illegal move");
+    public void moveTo(Position pos, Chessboard board) {
+        if (!canMoveTo(pos, board)) throw new IllegalArgumentException("Illegal move");
         else this.pos = pos;
     }
 
-    public abstract List<Position> getMoveList();
+    public abstract List<Position> getMoveList(Chessboard board);
 
-    public boolean canMoveTo(Position pos) {
-        return (getMoveList().contains(pos));
+    public boolean canMoveTo(Position pos, Chessboard board) {
+        return (getMoveList(board).contains(pos));
     }
 
-    public String printMoveList() {
-        List<Position> list = getMoveList();
+    public String printMoveList(Chessboard board) {
+        List<Position> list = getMoveList(board);
         StringBuilder str = new StringBuilder("[");
         for (int i = 0; i < list.size(); i++) {
             str.append(list.get(i));
@@ -45,5 +45,14 @@ public abstract class Piece {
             else str.append("]");
         }
         return str.toString();
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + "[" + this.getTeam() + "]: " + this.getPosition();
+    }
+
+    public String toSimpleString() {
+        return this.getClass().getSimpleName() + "[" + this.getTeam() + "]";
     }
 }

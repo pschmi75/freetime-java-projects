@@ -1,7 +1,7 @@
 package math;
 import java.lang.Math;
 
-public class Complex extends MyNumber
+public class Complex extends Number
 {
     double re;
     double im;
